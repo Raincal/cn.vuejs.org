@@ -446,7 +446,7 @@
         
         
         <li>
-            <a href="/v2/guide/deployment.html" class="sidebar-link">生产环境部署</a>
+            <a href="/v2/guide/deployment.html" class="sidebar-link">生产环境部署提示</a>
         </li>
     
         
@@ -631,7 +631,7 @@
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-component</span> <span class="attr">v-bind:class</span>=<span class="string">"&#123; active: isActive &#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>当 <code>isActive</code> 为 true 的时候，HTML 将被渲染成为:</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"foo bar active"</span>&gt;</span>Hi<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="绑定内联样式"><a href="#绑定内联样式" class="headerlink" title="绑定内联样式"></a>绑定内联样式</h2><h3 id="对象语法-1"><a href="#对象语法-1" class="headerlink" title="对象语法"></a>对象语法</h3><p><code>v-bind:style</code> 的对象语法十分直观——看着非常像 CSS ，其实它是一个 JavaScript 对象。 CSS 属性名可以用驼峰式（camelCase）或短横分隔命名（kebab-case）：</p>
+<h2 id="绑定内联样式"><a href="#绑定内联样式" class="headerlink" title="绑定内联样式"></a>绑定内联样式</h2><h3 id="对象语法-1"><a href="#对象语法-1" class="headerlink" title="对象语法"></a>对象语法</h3><p><code>v-bind:style</code> 的对象语法十分直观——看着非常像 CSS ，其实它是一个 JavaScript 对象。 CSS 属性名可以用驼峰式 (camelCase) 或 (配合引号的) 短横分隔命名 (kebab-case)：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:style</span>=<span class="string">"&#123; color: activeColor, fontSize: fontSize + 'px' &#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">data: &#123;</div><div class="line">  <span class="attr">activeColor</span>: <span class="string">'red'</span>,</div><div class="line">  <span class="attr">fontSize</span>: <span class="number">30</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>直接绑定到一个样式对象通常更好，让模板更清晰：</p>
@@ -640,12 +640,13 @@
 <p>同样的，对象语法常常结合返回对象的计算属性使用。</p>
 <h3 id="数组语法-1"><a href="#数组语法-1" class="headerlink" title="数组语法"></a>数组语法</h3><p><code>v-bind:style</code> 的数组语法可以将多个样式对象应用到一个元素上：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:style</span>=<span class="string">"[baseStyles, overridingStyles]"</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="自动添加前缀"><a href="#自动添加前缀" class="headerlink" title="自动添加前缀"></a>自动添加前缀</h3><p>当 <code>v-bind:style</code> 使用需要特定前缀的 CSS 属性时，如 <code>transform</code> ，Vue.js 会自动侦测并添加相应的前缀。</p>
+<h3 id="自动添加前缀"><a href="#自动添加前缀" class="headerlink" title="自动添加前缀"></a>自动添加前缀</h3><p>当 <code>v-bind:style</code> 使用需要<a href="https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix" target="_blank" rel="external">特定前缀</a>的 CSS 属性时，如 <code>transform</code> ，Vue.js 会自动侦测并添加相应的前缀。</p>
 <h3 id="多重值"><a href="#多重值" class="headerlink" title="多重值"></a>多重值</h3><blockquote>
 <p>2.3.0+</p>
 </blockquote>
 <p>从 2.3 开始你可以为 <code>style</code> 绑定中的属性提供一个包含多个值的数组，常用于提供多个带前缀的值：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:style</span>=<span class="string">"&#123; display: ['-webkit-box', '-ms-flexbox', 'flex'] &#125;"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这会渲染数组中最后一个被浏览器支持的值。在这个例子中，如果浏览器支持不带浏览器前缀的 flexbox，那么渲染结果会是 <code>display: flex</code>。</p>
 <hr>
 <blockquote>
 <p>原文：<a href="http://vuejs.org/guide/class-and-style.html" target="_blank" rel="external">http://vuejs.org/guide/class-and-style.html</a></p>

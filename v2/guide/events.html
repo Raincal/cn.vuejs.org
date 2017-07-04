@@ -446,7 +446,7 @@
         
         
         <li>
-            <a href="/v2/guide/deployment.html" class="sidebar-link">生产环境部署</a>
+            <a href="/v2/guide/deployment.html" class="sidebar-link">生产环境部署提示</a>
         </li>
     
         
@@ -627,7 +627,9 @@ var example2 = new Vue({
   methods: {
     greet: function (event) {
       alert('Hello ' + this.name + '!')
-      alert(event.target.tagName)
+      if (event) {
+        alert(event.target.tagName)
+      }
     }
   }
 })
@@ -654,7 +656,7 @@ new Vue({
 </script>
 
 <p>有时也需要在内联语句处理器中访问原生 DOM 事件。可以用特殊变量 <code>$event</code> 把它传入方法：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"warn('Form cannot be submitted yet.', $event)"</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"warn('Form cannot be submitted yet.', $event)"</span>&gt;</span></div><div class="line">  Submit</div><div class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">// ...</span></div><div class="line">methods: &#123;</div><div class="line">  <span class="attr">warn</span>: <span class="function"><span class="keyword">function</span> (<span class="params">message, event</span>) </span>&#123;</div><div class="line">    <span class="comment">// 现在我们可以访问原生事件对象</span></div><div class="line">    <span class="keyword">if</span> (event) event.preventDefault()</div><div class="line">    alert(message)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h2><p>在事件处理程序中调用 <code>event.preventDefault()</code> 或 <code>event.stopPropagation()</code> 是非常常见的需求。尽管我们可以在 methods 中轻松实现这点，但更好的方式是：methods 只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。</p>
 <p>为了解决这个问题， Vue.js 为 <code>v-on</code> 提供了 <strong>事件修饰符</strong>。通过由点(.)表示的指令后缀来调用修饰符。</p>
@@ -665,7 +667,7 @@ new Vue({
 <li><code>.self</code></li>
 <li><code>.once</code></li>
 </ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 阻止单击事件冒泡 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 提交事件不再重载页面 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 修饰符可以串联  --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop.prevent</span>=<span class="string">"doThat"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 只有修饰符 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 添加事件侦听器时使用事件捕获模式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.capture</span>=<span class="string">"doThis"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 只当事件在该元素本身（而不是子元素）触发时触发回调 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.self</span>=<span class="string">"doThat"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 阻止单击事件冒泡 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 提交事件不再重载页面 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 修饰符可以串联  --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop.prevent</span>=<span class="string">"doThat"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 只有修饰符 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 添加事件侦听器时使用事件捕获模式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.capture</span>=<span class="string">"doThis"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 只当事件在该元素本身（比如不是子元素）触发时触发回调 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.self</span>=<span class="string">"doThat"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <p class="tip">使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。因此，用 <code>@click.prevent.self</code> 会阻止<strong>所有的点击</strong>，而 <code>@click.self.prevent</code> 只会阻止元素上的点击。</p>
 
 <blockquote>
@@ -702,8 +704,9 @@ new Vue({
 <li><code>.meta</code></li>
 </ul>
 <blockquote>
-<p>注意：在Mac系统键盘上，meta对应命令键 (⌘)。在Windows系统键盘meta对应windows徽标键(⊞)。在Sun操作系统键盘上，meta对应实心宝石键 (◆)。在其他特定键盘上，尤其在MIT和Lisp键盘及其后续，比如Knight键盘，space-cadet键盘，meta被标记为“META”。在Symbolics键盘上，meta被标记为“META” 或者 “Meta”。<br>例如:</p>
+<p>注意：在Mac系统键盘上，meta对应命令键 (⌘)。在Windows系统键盘meta对应windows徽标键(⊞)。在Sun操作系统键盘上，meta对应实心宝石键 (◆)。在其他特定键盘上，尤其在MIT和Lisp键盘及其后续，比如Knight键盘，space-cadet键盘，meta被标记为“META”。在Symbolics键盘上，meta被标记为“META” 或者 “Meta”。</p>
 </blockquote>
+<p>例如:</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="comment">&lt;!-- Alt + C --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">keyup.alt.67</span>=<span class="string">"clear"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- Ctrl + Click --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> @<span class="attr">click.ctrl</span>=<span class="string">"doSomething"</span>&gt;</span>Do something<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <p class="tip">修饰键比正常的按键不同；修饰键和 <code>keyup</code> 事件一起用时，事件引发时必须按下正常的按键。换一种说法：如果要引发 <code>keyup.ctrl</code>，必须按下 <code>ctrl</code> 时释放其他的按键；单单释放 <code>ctrl</code> 不会引发事件。</p>
 
